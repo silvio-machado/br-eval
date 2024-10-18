@@ -1,16 +1,19 @@
-# Byte-compiled / optimized / DLL files
+# Diretórios de build
+build/
+dist/
+*.egg-info/
+
+# Arquivos compilados
 __pycache__/
 *.py[cod]
 *$py.class
-.idea
 
-# Envs
-.env
-*.env
-.venv
-*.venv
-.env-example
+# Ambiente virtual
+.venv/
+venv/
 
-# local logs dir
-logs/
+# Outros arquivos temporários
 *.log
+*.tmp
+*.bak
+*.swp
