@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='br-eval',
-    version='0.1.1',
+    version='0.2.2',
     description='Library for validation and formatting of Brazilian data',
     author='Silvio Machado',
     author_email='silvio.machado@gmail.com',
