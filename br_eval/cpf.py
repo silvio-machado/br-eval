@@ -1,6 +1,5 @@
 import re
 from .exceptions.cpf_exceptions import (
-    CPFError,
     InvalidCPFError,
     RepeatedDigitsCPFError,
     InvalidFormatCPFError,
@@ -11,26 +10,27 @@ from .exceptions.cpf_exceptions import (
 def format_cpf(cpf):
     """
     Formats a CPF string in the pattern XXX.XXX.XXX-XX.
-    
+
     Args:
         cpf (str): The CPF string with exactly 11 digits.
-    
+
     Returns:
         str: The formatted CPF string.
-    
+
     Raises:
         ValueError: If the CPF does not have exactly 11 digits.
     """
     # Remove all non-digit characters from the CPF
     cpf_numbers = re.sub(r'\D', '', cpf)
-    
+
     # Verify if the CPF has exactly 11 digits
     if len(cpf_numbers) != 11:
         raise ValueError("CPF must have exactly 11 digits.")
-    
+
     # Format the CPF
-    formatted_cpf = f"{cpf_numbers[:3]}.{cpf_numbers[3:6]}.{cpf_numbers[6:9]}-{cpf_numbers[9:]}"
-    
+    formatted_cpf = f"{cpf_numbers[:3]}.{cpf_numbers[3:6]}."\
+        f"{cpf_numbers[6:9]}-{cpf_numbers[9:]}"
+
     return formatted_cpf
 
 
@@ -46,6 +46,7 @@ def clean_cpf(cpf):
     if len(cpf_numbers) != 11:
         raise InvalidLengthCPFError(len(cpf_numbers))
     return cpf_numbers
+
 
 def validate_cpf(cpf):
     """

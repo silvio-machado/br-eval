@@ -3,7 +3,6 @@ from br_eval.cnpj import clean_cnpj, format_cnpj, validate_cnpj
 from br_eval.exceptions.cnpj_exceptions import (
     InvalidCNPJError,
     RepeatedDigitsCNPJError,
-    InvalidFormatCNPJError,
     InvalidLengthCNPJError
 )
 

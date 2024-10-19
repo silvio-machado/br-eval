@@ -1,11 +1,11 @@
 import re
 from .exceptions.cnpj_exceptions import (
-    CNPJError,
     InvalidCNPJError,
     RepeatedDigitsCNPJError,
     InvalidFormatCNPJError,
     InvalidLengthCNPJError
 )
+
 
 def clean_cnpj(cnpj):
     """
@@ -41,7 +41,8 @@ def format_cnpj(cnpj):
     """
     cnpj_numbers = clean_cnpj(cnpj)
 
-    formatted_cnpj = f"{cnpj_numbers[:2]}.{cnpj_numbers[2:5]}.{cnpj_numbers[5:8]}/{cnpj_numbers[8:12]}-{cnpj_numbers[12:]}"
+    formatted_cnpj = f"{cnpj_numbers[:2]}.{cnpj_numbers[2:5]}."\
+        f"{cnpj_numbers[5:8]}/{cnpj_numbers[8:12]}-{cnpj_numbers[12:]}"
     return formatted_cnpj
 
 
@@ -76,7 +77,9 @@ def validate_cnpj(cnpj):
 
     # Calculate the second verification digit
     weights_second = [6] + weights_first
-    sum_total = sum(int(cnpj_numbers[i]) * weights_second[i] for i in range(13))
+    sum_total = sum(
+        int(cnpj_numbers[i]) * weights_second[i] for i in range(13)
+    )
     remainder = sum_total % 11
     second_digit = '0' if remainder < 2 else str(11 - remainder)
 
