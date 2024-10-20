@@ -1,3 +1,4 @@
+import random
 import re
 from .exceptions.cpf_exceptions import (
     InvalidCPFError,
@@ -84,3 +85,41 @@ def validate_cpf(cpf):
         raise InvalidCPFError("Second verification digit does not match.")
 
     return True
+
+
+def generate_cpf(formatted=False):
+    """
+    Generates a valid CPF number.
+
+    Args:
+        formatted (bool):
+            If True, returns the CPF in the formatted pattern XXX.XXX.XXX-XX.
+            If False, returns the CPF as a numeric string.
+
+    Returns:
+        str: A valid CPF number.
+    """
+    # Generate the first nine digits randomly
+    cpf_numbers = [random.randint(0, 9) for _ in range(9)]
+
+    # Calculate the first verification digit
+    sum_total = sum(cpf_numbers[i] * (10 - i) for i in range(9))
+    remainder = (sum_total * 10) % 11
+    digit1 = 0 if remainder == 10 else remainder
+
+    cpf_numbers.append(digit1)
+
+    # Calculate the second verification digit
+    sum_total = sum(cpf_numbers[i] * (11 - i) for i in range(10))
+    remainder = (sum_total * 10) % 11
+    digit2 = 0 if remainder == 10 else remainder
+
+    cpf_numbers.append(digit2)
+
+    # Convert list of digits to string
+    cpf_str = ''.join(map(str, cpf_numbers))
+
+    if formatted:
+        return format_cpf(cpf_str)
+    else:
+        return cpf_str

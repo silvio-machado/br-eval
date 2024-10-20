@@ -50,7 +50,13 @@ print(f"Formatted CNPJ: {formatted_cnpj}")
 ```
 
 ## Contributing
+
 Contributions are welcome! Please open an issue or submit a pull request.
 
 ## License
+
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+# IMPORTANT NOTICE
+
+Disclaimer: The CPF and CNPJ generator functions provided by this library are intended solely for development and testing purposes. The generated numbers do not correspond to real individuals or companies and should not be used in production systems, official registrations, or for any illegal or fraudulent activities. Misuse of these functions is the sole responsibility of the user.

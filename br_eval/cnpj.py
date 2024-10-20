@@ -1,3 +1,4 @@
+import random
 import re
 from .exceptions.cnpj_exceptions import (
     InvalidCNPJError,
@@ -89,3 +90,44 @@ def validate_cnpj(cnpj):
         raise InvalidCNPJError("Verification digits do not match.")
 
     return True
+
+
+def generate_cnpj(formatted=False):
+    """
+    Generates a valid CNPJ number.
+
+    Args:
+        formatted (bool):
+            True, returns the CNPJ in the formatted pattern XX.XXX.XXX/YYYY-ZZ.
+            False, returns the CNPJ as a numeric string.
+
+    Returns:
+        str: A valid CNPJ number.
+    """
+    # Generate the first twelve digits
+    cnpj_numbers = [random.randint(0, 9) for _ in range(8)]
+    cnpj_numbers += [0, 0, 0, 1]  # Commonly used for branch identifier
+
+    # Calculate the first verification digit
+    weights_first = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
+    sum_total = sum(cnpj_numbers[i] * weights_first[i] for i in range(12))
+    remainder = sum_total % 11
+    first_digit = 0 if remainder < 2 else 11 - remainder
+
+    cnpj_numbers.append(first_digit)
+
+    # Calculate the second verification digit
+    weights_second = [6] + weights_first
+    sum_total = sum(cnpj_numbers[i] * weights_second[i] for i in range(13))
+    remainder = sum_total % 11
+    second_digit = 0 if remainder < 2 else 11 - remainder
+
+    cnpj_numbers.append(second_digit)
+
+    # Convert list of digits to string
+    cnpj_str = ''.join(map(str, cnpj_numbers))
+
+    if formatted:
+        return format_cnpj(cnpj_str)
+    else:
+        return cnpj_str
