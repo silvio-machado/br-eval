@@ -1,5 +1,5 @@
 import unittest
-from br_eval.cpf import format_cpf, clean_cpf, validate_cpf
+from br_eval.cpf import format_cpf, clean_cpf, generate_cpf, validate_cpf
 from br_eval.exceptions.cpf_exceptions import (
     InvalidCPFError,
     RepeatedDigitsCPFError,
@@ -12,7 +12,19 @@ class TestCPF(unittest.TestCase):
         self.assertTrue(validate_cpf("145.382.206-20"))  # Valid CPF from the example
         self.assertTrue(validate_cpf("529.982.247-25"))
         self.assertTrue(validate_cpf("52998224725"))
-    
+
+    def test_valid_cpf_generator(self):
+        """
+        This test will generate 10 valid CPFs and check if they are valid.
+        Alsto generates 10 formatted CPFs and checks if they are valid.
+        """
+        for _ in range(10):
+            cpf = generate_cpf()
+            self.assertTrue(validate_cpf(cpf))
+        for _ in range(10):
+            cpf = generate_cpf(formatted=True)
+            self.assertTrue(validate_cpf(cpf))
+
     def test_invalid_first_digit(self):
         with self.assertRaises(InvalidCPFError) as context:
             validate_cpf("145.382.206-30")  # Altered first verification digit

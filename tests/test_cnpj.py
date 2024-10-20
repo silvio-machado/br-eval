@@ -1,5 +1,5 @@
 import unittest
-from br_eval.cnpj import clean_cnpj, format_cnpj, validate_cnpj
+from br_eval.cnpj import clean_cnpj, generate_cnpj, format_cnpj, validate_cnpj
 from br_eval.exceptions.cnpj_exceptions import (
     InvalidCNPJError,
     RepeatedDigitsCNPJError,
@@ -11,6 +11,18 @@ class TestCNPJ(unittest.TestCase):
         self.assertTrue(validate_cnpj("13.347.016/0001-17"))  # Example CNPJ
         self.assertTrue(validate_cnpj("00.000.000/0001-91"))
         self.assertTrue(validate_cnpj("00000000000191"))
+
+    def test_valid_cnpj_generator(self):
+        """
+        This test will generate 10 valid CNPJs and check if they are valid.
+        Also generates 10 formatted CNPJs and checks if they are valid.
+        """
+        for _ in range(10):
+            cnpj = generate_cnpj()
+            self.assertTrue(validate_cnpj(cnpj))
+        for _ in range(10):
+            cnpj = generate_cnpj(formatted=True)
+            self.assertTrue(validate_cnpj(cnpj))
     
     def test_invalid_verification_digits(self):
         with self.assertRaises(InvalidCNPJError):
