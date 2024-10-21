@@ -10,6 +10,10 @@ from .cnpj import (
     validate_cnpj,
     format_cnpj,
 )
+from .plate import (
+    format_plate,
+    validate_plate
+)
 
 
 __all__ = [
@@ -21,4 +25,6 @@ __all__ = [
     'format_cnpj',
     'generate_cnpj',
     'validate_cnpj',
+    'format_plate',
+    'validate_plate'
 ]

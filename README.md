@@ -3,9 +3,9 @@
 Python library for validation and formatting of Brazilian data such as:
 - CPF
 - CNPJ
-- postal codes (CEP) # TODO
-- phone numbers # TODO
-- and vehicle license plates. # TODO
+- Vehicle license plates.
+- Postal codes (CEP) # TODO
+- Phone numbers # TODO
 
 ## Installation
 
@@ -49,6 +49,37 @@ formatted_cnpj = format_cnpj('13347016000117')
 print(f"Formatted CNPJ: {formatted_cnpj}")
 ```
 
+## Plate example
+
+```python
+from validator_brazil import validate_plate, format_plate
+
+# Validate Plate
+try:
+    plate_type = validate_plate('ABC1234')
+    print(f"Plate is valid. Type: {plate_type}")
+except Exception as e:
+    print(f"Invalid plate: {e}")
+
+# Validate Mercosul Car Plate
+try:
+    plate_type = validate_plate('ABC1D23')
+    print(f"Plate is valid. Type: {plate_type}")
+except Exception as e:
+    print(f"Invalid plate: {e}")
+
+# Validate Mercosul Motorcycle Plate
+try:
+    plate_type = validate_plate('ABC12D3')
+    print(f"Plate is valid. Type: {plate_type}")
+except Exception as e:
+    print(f"Invalid plate: {e}")
+
+# Format Plate
+formatted_plate = format_plate('ABC1D23')
+print(f"Formatted Plate: {formatted_plate}")  # Output: 'ABC-1D23'
+```
+
 ## Contributing
 
 Contributions are welcome! Please open an issue or submit a pull request.
@@ -59,4 +90,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 # IMPORTANT NOTICE
 
-Disclaimer: The CPF and CNPJ generator functions provided by this library are intended solely for development and testing purposes. The generated numbers do not correspond to real individuals or companies and should not be used in production systems, official registrations, or for any illegal or fraudulent activities. Misuse of these functions is the sole responsibility of the user.
+Disclaimer 1: The CPF and CNPJ generator functions provided by this library are intended solely for development and testing purposes. The generated numbers do not correspond to real individuals or companies and should not be used in production systems, official registrations, or for any illegal or fraudulent activities. Misuse of these functions is the sole responsibility of the user.
+
+Disclaimer 2: The vehicle plate generator functions provided in this library are intended solely for development and testing purposes. The generated plates do not correspond to real vehicles and should not be used in production systems, official documents, registrations, or any activities involving real-world entities. Misuse of these functions is the sole responsibility of the user.
