@@ -5,7 +5,7 @@ Python library for validation and formatting of Brazilian data such as:
 - CNPJ
 - Vehicle license plates.
 - Postal codes (CEP)
-- Phone numbers # TODO
+- Phone numbers
 
 ## Installation
 
@@ -35,7 +35,6 @@ except Exception as e:
     print(f"Invalid CEP: {e}")  # This will now raise an exception
 
 ```
-*Note:* The CEP validator requires that the input contains only numeric characters. If the CEP contains letters or other invalid characters, it will raise an InvalidCharacterCEPError.
 
 ## CNPJ example
 
@@ -105,6 +104,43 @@ print(f"Formatted CEP: {formatted_cep}")
 cep_generated = generate_cep(formatted=True)
 print(f"Generated CEP: {cep_generated}")
 ```
+*Note:* The CEP validator requires that the input contains only numeric characters. If the CEP contains letters or other invalid characters, it will raise an InvalidCharacterCEPError.
+
+## Phone example
+
+```python
+from br_eval import (
+    validate_phone_number,
+    format_phone_number,
+    generate_phone_number
+)
+
+# Validate Mobile Phone Number
+try:
+    result = validate_phone_number('(11) 98765-4321')
+    print(f"Phone number is valid. Type: {result['type']}")
+except Exception as e:
+    print(f"Invalid phone number: {e}")
+
+# Validate Landline Phone Number
+try:
+    result = validate_phone_number('21 3123-4567')
+    print(f"Phone number is valid. Type: {result['type']}")
+except Exception as e:
+    print(f"Invalid phone number: {e}")
+
+# Format Phone Number
+formatted_number = format_phone_number('11987654321', international=True)
+print(f"Formatted Phone Number: {formatted_number}")  # Output: '+55 (11) 98765-4321'
+
+# Generate Mobile Phone Number
+generated_mobile = generate_phone_number(phone_type='mobile', formatted=True)
+print(f"Generated Mobile Phone Number: {generated_mobile}")
+
+# Generate Landline Phone Number
+generated_landline = generate_phone_number(phone_type='landline', formatted=True)
+print(f"Generated Landline Phone Number: {generated_landline}")
+```
 
 ## Contributing
 
@@ -121,3 +157,5 @@ Disclaimer 1: The CPF and CNPJ generator functions provided by this library are 
 Disclaimer 2: The vehicle plate generator functions provided in this library are intended solely for development and testing purposes. The generated plates do not correspond to real vehicles and should not be used in production systems, official documents, registrations, or any activities involving real-world entities. Misuse of these functions is the sole responsibility of the user.
 
 Disclaimer 3: The CEP generator function provided in this library is intended solely for development and testing purposes. The generated CEPs do not necessarily correspond to real addresses and should not be used in production systems, official documents, registrations, or any activities involving real-world entities. Misuse of this function is the sole responsibility of the user.
+
+Disclaimer 4: The phone number generator functions provided in this library are intended solely for development and testing purposes. The generated phone numbers do not correspond to real individuals or active lines and should not be used in production systems, official documents, registrations, marketing campaigns, telemarketing activities, or any activities involving real-world entities. Misuse of these functions is the sole responsibility of the user.
