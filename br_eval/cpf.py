@@ -1,5 +1,6 @@
 import random
 import re
+from typing import List
 from .exceptions.cpf_exceptions import (
     InvalidCPFError,
     RepeatedDigitsCPFError,
@@ -8,7 +9,7 @@ from .exceptions.cpf_exceptions import (
 )
 
 
-def format_cpf(cpf):
+def format_cpf(cpf: str) -> str:
     """
     Formats a CPF string in the pattern XXX.XXX.XXX-XX.
 
@@ -35,7 +36,7 @@ def format_cpf(cpf):
     return formatted_cpf
 
 
-def clean_cpf(cpf):
+def clean_cpf(cpf: str) -> str:
     """
     Removes all non-digit characters from the CPF.
     Raises an exception if the CPF does not have 11 digits after cleaning.
@@ -49,7 +50,7 @@ def clean_cpf(cpf):
     return cpf_numbers
 
 
-def validate_cpf(cpf):
+def validate_cpf(cpf: str) -> bool:
     """
     Validates a CPF by checking the verification digits.
     Raises specific exceptions for different validation errors.
@@ -87,7 +88,7 @@ def validate_cpf(cpf):
     return True
 
 
-def generate_cpf(formatted=False):
+def generate_cpf(formatted: bool = False) -> str:
     """
     Generates a valid CPF number.
 
@@ -100,7 +101,7 @@ def generate_cpf(formatted=False):
         str: A valid CPF number.
     """
     # Generate the first nine digits randomly
-    cpf_numbers = [random.randint(0, 9) for _ in range(9)]
+    cpf_numbers: List[int] = [random.randint(0, 9) for _ in range(9)]
 
     # Calculate the first verification digit
     sum_total = sum(cpf_numbers[i] * (10 - i) for i in range(9))

@@ -18,22 +18,18 @@ pip install br-eval
 ## CPF
 
 ```python
-from br_eval.cep import validate_cep, format_cep, generate_cep
+from br_eval.cpf import validate_cpf, format_cpf
 
-# Validate CEP
+# Validate CPF
 try:
-    validate_cep('01001-000')
-    print("CEP is valid.")
+    validate_cpf('145.382.206-20')
+    print("CPF is valid.")
 except Exception as e:
-    print(f"Invalid CEP: {e}")
+    print(f"Invalid CPF: {e}")
 
-# Validate CEP with extra characters
-try:
-    validate_cep('94445abcx162')
-    print("CEP is valid.")
-except Exception as e:
-    print(f"Invalid CEP: {e}")  # This will now raise an exception
-
+# Format CPF
+formatted_cpf = format_cpf('14538220620')
+print(f"Formatted CPF: {formatted_cpf}")
 ```
 
 ## CNPJ example

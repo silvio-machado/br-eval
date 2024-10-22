@@ -37,10 +37,25 @@ VALID_DDD_CODES = {
 }
 
 
-def clean_phone_number(phone_number):
+def clean_phone_number(phone_number: str) -> str:
     """
     Removes all non-digit characters from the phone number.
+    Raises InvalidCharacterPhoneNumberError if letters are present.
+
+    Args:
+        phone_number (str): The phone number to clean.
+
+    Returns:
+        str: The cleaned phone number containing only digits.
+
+    Raises:
+        InvalidCharacterPhoneNumberError: If the phone number contains letters.
     """
+    # Check for letters in the input
+    if re.search(r'[a-zA-Z]', phone_number):
+        raise InvalidCharacterPhoneNumberError(
+            "Phone number contains letters."
+        )
     return re.sub(r'\D', '', phone_number)
 
 

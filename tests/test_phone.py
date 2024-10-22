@@ -52,10 +52,11 @@ class TestPhoneNumber(unittest.TestCase):
             validate_phone_number('00123456789')
     
     def test_invalid_number_pattern(self):
-        with self.assertRaises(InvalidPhoneNumberError):
+        with self.assertRaises(InvalidLengthPhoneNumberError):
             validate_phone_number('119123456')  # Incorrect length
         with self.assertRaises(InvalidPhoneNumberError):
-            validate_phone_number('11961234567')  # Landline starting with 6
+            validate_phone_number('11812345678')  # Mobile number not starting with '9'
+
     
     def test_format_phone_number(self):
         formatted = format_phone_number('11987654321')
