@@ -29,7 +29,14 @@ from .cep_exceptions import (
     InvalidCharacterCEPError
 )
 
-# This list is used in the __all__ variable to define what symbols are exported
+from .phone_exceptions import (
+    PhoneNumberError,
+    InvalidPhoneNumberError,
+    InvalidLengthPhoneNumberError,
+    InvalidCharacterPhoneNumberError,
+    InvalidDDDPhoneNumberError
+)
+
 __all__ = [
     'CPFError', 'InvalidCPFError', 'RepeatedDigitsCPFError',
     'InvalidFormatCPFError', 'InvalidLengthCPFError',
@@ -38,5 +45,8 @@ __all__ = [
     'PlateError', 'InvalidPlateError', 'InvalidFormatPlateError',
     'InvalidCharacterPlateError', 'InvalidLengthPlateError',
     'CEPError', 'InvalidCEPError', 'InvalidLengthCEPError',
-    'InvalidCharacterCEPError'
+    'InvalidCharacterCEPError',
+    'PhoneNumberError', 'InvalidPhoneNumberError',
+    'InvalidLengthPhoneNumberError',
+    'InvalidCharacterPhoneNumberError', 'InvalidDDDPhoneNumberError'
 ]
