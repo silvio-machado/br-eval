@@ -4,7 +4,7 @@ Python library for validation and formatting of Brazilian data such as:
 - CPF
 - CNPJ
 - Vehicle license plates.
-- Postal codes (CEP) # TODO
+- Postal codes (CEP)
 - Phone numbers # TODO
 
 ## Installation
@@ -18,19 +18,24 @@ pip install br-eval
 ## CPF
 
 ```python
-from br_eval.cpf import validate_cpf, format_cpf
+from br_eval.cep import validate_cep, format_cep, generate_cep
 
-# Validate CPF
+# Validate CEP
 try:
-    validate_cpf('145.382.206-20')
-    print("CPF is valid.")
+    validate_cep('01001-000')
+    print("CEP is valid.")
 except Exception as e:
-    print(f"Invalid CPF: {e}")
+    print(f"Invalid CEP: {e}")
 
-# Format CPF
-formatted_cpf = format_cpf('14538220620')
-print(f"Formatted CPF: {formatted_cpf}")
+# Validate CEP with extra characters
+try:
+    validate_cep('94445abcx162')
+    print("CEP is valid.")
+except Exception as e:
+    print(f"Invalid CEP: {e}")  # This will now raise an exception
+
 ```
+*Note:* The CEP validator requires that the input contains only numeric characters. If the CEP contains letters or other invalid characters, it will raise an InvalidCharacterCEPError.
 
 ## CNPJ example
 
@@ -80,6 +85,27 @@ formatted_plate = format_plate('ABC1D23')
 print(f"Formatted Plate: {formatted_plate}")  # Output: 'ABC-1D23'
 ```
 
+## CEP example
+
+```python
+from br_eval.cep import validate_cep, format_cep, generate_cep
+
+# Validate CEP
+try:
+    validate_cep('01001-000')
+    print("CEP is valid.")
+except Exception as e:
+    print(f"Invalid CEP: {e}")
+
+# Format CEP
+formatted_cep = format_cep('01001000')
+print(f"Formatted CEP: {formatted_cep}")
+
+# Generate CEP
+cep_generated = generate_cep(formatted=True)
+print(f"Generated CEP: {cep_generated}")
+```
+
 ## Contributing
 
 Contributions are welcome! Please open an issue or submit a pull request.
@@ -93,3 +119,5 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 Disclaimer 1: The CPF and CNPJ generator functions provided by this library are intended solely for development and testing purposes. The generated numbers do not correspond to real individuals or companies and should not be used in production systems, official registrations, or for any illegal or fraudulent activities. Misuse of these functions is the sole responsibility of the user.
 
 Disclaimer 2: The vehicle plate generator functions provided in this library are intended solely for development and testing purposes. The generated plates do not correspond to real vehicles and should not be used in production systems, official documents, registrations, or any activities involving real-world entities. Misuse of these functions is the sole responsibility of the user.
+
+Disclaimer 3: The CEP generator function provided in this library is intended solely for development and testing purposes. The generated CEPs do not necessarily correspond to real addresses and should not be used in production systems, official documents, registrations, or any activities involving real-world entities. Misuse of this function is the sole responsibility of the user.
