@@ -6,7 +6,7 @@ long_description = (this_directory / "README.md").read_text()
 
 setup(
     name='br-eval',
-    version='1.0.0',
+    version='1.0.1',
     description='Library for validation and formatting of Brazilian data',
     long_description=long_description,
     long_description_content_type='text/markdown',
